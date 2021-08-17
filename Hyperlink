@@ -1,0 +1,51 @@
+package week2.assignments;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class Assignment1Hyperlink {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		WebDriverManager.chromedriver().setup();
+		ChromeDriver driver=new ChromeDriver();
+		driver.get("http://leafground.com/pages/Link.html");
+		 driver.manage().window().maximize();
+		 String title=driver.getTitle();
+		 System.out.println(title);
+		 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		 
+		 //go to home page
+		WebElement link= driver.findElementByXPath("//div[@class='large-6 small-12 columns']/a");	
+		link.click();
+		driver.findElementByXPath("(//h5[@class='wp-categories-title']/following-sibling::img)[3]").click();
+		//find where this link goes w/o clicking
+		
+		WebElement link2=driver.findElementByXPath("(//div[@class='large-6 small-12 columns']/a)[2]");
+		System.out.println(link2.getAttribute("href"));
+		
+		//verify am i broken
+		WebElement link3=driver.findElementByXPath("(//div[@class='large-6 small-12 columns']/a)[3]");
+		boolean l3=link3.isDisplayed();
+		System.out.println(l3);
+		 
+		
+		List<WebElement> hyper=driver.findElementsByTagName("a");
+		int links=hyper.size();
+		System.out.println("total links in this web page "+links);
+		
+	/*	WebElement link4=driver.findElementByXPath("(//div[@class='large-6 small-12 columns']/a)[4]");
+		link4.click();
+		WebElement totalink=driver.findElementByTagName("a");
+		System.out.println("Total links available in this web page " +totalink);*/
+		
+	
+		
+	}
+
+}
